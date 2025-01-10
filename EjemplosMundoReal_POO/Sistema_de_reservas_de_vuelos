@@ -1,0 +1,55 @@
+class Vuelo:
+    def __init__(self, numero, destino, capacidad):
+        self.numero = numero
+        self.destino = destino
+        self.capacidad = capacidad
+        self.pasajeros = []
+
+    def agregar_pasajero(self, pasajero):
+        if len(self.pasajeros) < self.capacidad:
+            self.pasajeros.append(pasajero)
+            return True
+        else:
+            return False
+
+    def mostrar_info(self):
+        print(f"Vuelo {self.numero} a {self.destino}")
+        print(f"Capacidad: {self.capacidad}")
+        print(f"Pasajeros: {len(self.pasajeros)}")
+
+class Pasajero:
+    def __init__(self, nombre, pasaporte):
+        self.nombre = nombre
+        self.pasaporte = pasaporte
+
+class Reserva:
+    def __init__(self):
+        self.vuelos = []
+
+    def agregar_vuelo(self, vuelo):
+        self.vuelos.append(vuelo)
+
+    def mostrar_vuelos(self):
+        for vuelo in self.vuelos:
+            vuelo.mostrar_info()
+            print("-" * 20)
+
+# Crear algunos vuelos
+vuelo1 = Vuelo("AA123", "Nueva York", 2)
+vuelo2 = Vuelo("BA456", "Londres", 3)
+
+# Crear algunos pasajeros
+pasajero1 = Pasajero("Juan Pérez", "A12345678")
+pasajero2 = Pasajero("Ana Gómez", "B87654321")
+
+# Crear una reserva y agregar vuelos
+reserva = Reserva()
+reserva.agregar_vuelo(vuelo1)
+reserva.agregar_vuelo(vuelo2)
+
+# Agregar pasajeros a los vuelos
+vuelo1.agregar_pasajero(pasajero1)
+vuelo1.agregar_pasajero(pasajero2)
+
+# Mostrar información de los vuelos
+reserva.mostrar_vuelos()
