@@ -1,0 +1,57 @@
+class Producto:
+    def __init__(self, nombre, precio, stock):
+        self.nombre = nombre
+        self.precio = precio
+        self.stock = stock
+
+    def mostrar_info(self):
+        print(f"Producto: {self.nombre}")
+        print(f"Precio: ${self.precio}")
+        print(f"Stock: {self.stock}")
+
+class Carrito:
+    def __init__(self):
+        self.productos = []
+
+    def agregar_producto(self, producto, cantidad):
+        if producto.stock >= cantidad:
+            self.productos.append((producto, cantidad))
+            producto.stock -= cantidad
+            return True
+        else:
+            return False
+
+    def mostrar_carrito(self):
+        for producto, cantidad in self.productos:
+            print(f"{producto.nombre} - Cantidad: {cantidad}")
+        print("-" * 20)
+
+class Cliente:
+    def __init__(self, nombre):
+        self.nombre = nombre
+        self.carrito = Carrito()
+
+    def agregar_al_carrito(self, producto, cantidad):
+        if self.carrito.agregar_producto(producto, cantidad):
+            print(f"{cantidad} {producto.nombre}(s) agregado(s) al carrito.")
+        else:
+            print(f"No hay suficiente stock de {producto.nombre}.")
+
+    def mostrar_carrito(self):
+        print(f"Carrito de {self.nombre}:")
+        self.carrito.mostrar_carrito()
+
+# Crear algunos productos
+producto1 = Producto("Laptop", 1000, 5)
+producto2 = Producto("Teléfono", 500, 10)
+
+# Crear un cliente
+cliente = Cliente("Carlos")
+
+# Agregar productos al carrito del cliente
+cliente.agregar_al_carrito(producto1, 2)
+cliente.agregar_al_carrito(producto2, 3)
+
+# Mostrar el carrito del cliente
+cliente.mostrar_carrito()
+
